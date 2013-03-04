@@ -5,18 +5,21 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.graphics.Texture
 import scala.collection.mutable.ArrayBuffer
+import com.badlogic.gdx.graphics.FPSLogger
 
 class Game extends ApplicationListener {
   var x, y: Float = _
   var dx, dy: Float = _
   var spriteBatch: SpriteBatch = _
   var texReg:TextureRegion = _
-  var tex:Texture = _
+  var tex:Texture = _ 
   var delta: Float = _
   val entities = new ArrayBuffer[Entity]
+  var fpsLogger: FPSLogger = _
   
   
   def create(): Unit = {
+    fpsLogger = new FPSLogger()
     Gdx.graphics.setVSync(false)
     for(i <- 0 to 50) {
       x = 240f
@@ -52,6 +55,8 @@ class Game extends ApplicationListener {
       entities.foreach(_.draw(spriteBatch))
       spriteBatch.draw(texReg, 20, 80)
     spriteBatch.end()
+    
+    fpsLogger.log()
   }
   
   def resize(x: Int, y: Int): Unit = {}
