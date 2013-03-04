@@ -28,7 +28,10 @@ class Game extends ApplicationListener {
     texReg = new TextureRegion(tex ,20,20,32,32)
     
   }
-  def dispose(): Unit = {}
+  def dispose(): Unit = {
+    spriteBatch.dispose()
+    tex.dispose()
+  }
   def pause(): Unit = {}
   def render(): Unit = {
     Gdx.gl.glClearColor(0.2f,0.7f,0.3f, 1)
