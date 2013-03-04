@@ -34,6 +34,7 @@ class Game extends ApplicationListener {
   def dispose(): Unit = {
     spriteBatch.dispose()
     tex.dispose()
+    Asset.dispose
   }
   def pause(): Unit = {}
   def render(): Unit = {
