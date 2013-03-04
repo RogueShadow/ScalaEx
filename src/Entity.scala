@@ -6,8 +6,7 @@ import com.badlogic.gdx.Gdx
 class Entity(var x: Float, var y: Float) {
   var rot: Float = _
   var sprite: Sprite = _
-  var tex = new Texture(Gdx.files.internal("./res/wing.png"))
-  sprite = new Sprite(tex)
+  sprite = new Sprite(Asset.wingTex)
   //var delta: Float = _
   
   def update(offx: Float, offy: Float, delta: Float) = {
