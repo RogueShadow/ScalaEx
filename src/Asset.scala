@@ -6,5 +6,6 @@ object Asset {
 	
 	def dispose() {
 	  wingTex.dispose()
+	  
 	}
 }

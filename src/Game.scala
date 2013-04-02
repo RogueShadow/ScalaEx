@@ -16,7 +16,7 @@ class Game extends ApplicationListener {
   var delta: Float = _
   val entities = new ArrayBuffer[Entity]
   var fpsLogger: FPSLogger = _
-  
+  var levelDat = new Array[Int](20*10)
   
   def create(): Unit = {
     fpsLogger = new FPSLogger()
@@ -29,6 +29,10 @@ class Game extends ApplicationListener {
     spriteBatch = new SpriteBatch()
     tex = new Texture(Gdx.files.internal("./res/sheepvert.gif"))
     texReg = new TextureRegion(tex ,20,20,32,32)
+
+    //World.load("some.map")
+    println(World.load("some.map"))
+    World.load("idontexist.map")
     
   }
   def dispose(): Unit = {
@@ -40,10 +44,25 @@ class Game extends ApplicationListener {
   def render(): Unit = {
     Gdx.gl.glClearColor(0.2f,0.7f,0.3f, 1)
     Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT)
+    update(Gdx.graphics.getDeltaTime())
     
-    delta = Gdx.graphics.getDeltaTime()
+    //World.edit(2, 4, 10)
+    
+    
+    spriteBatch.begin()
+      entities.foreach(_.draw(spriteBatch))
+      spriteBatch.draw(texReg, 20, 80)
+    spriteBatch.end()
+    
+    //fpsLogger.log()
+  }
+  
+  def resize(x: Int, y: Int): Unit = {}
+  def resume(): Unit = {}
+  def update(delta: Float) {
     dx = 0
     dy = 0
+    
 
     if(Gdx.input.isKeyPressed(19)) dy += 34 * delta
     if(Gdx.input.isKeyPressed(21)) dx -= 34 * delta
@@ -52,15 +71,5 @@ class Game extends ApplicationListener {
 
     entities.foreach(_.update(dx, dy, delta))
     
-    spriteBatch.begin()
-      entities.foreach(_.draw(spriteBatch))
-      spriteBatch.draw(texReg, 20, 80)
-    spriteBatch.end()
-    
-    fpsLogger.log()
   }
-  
-  def resize(x: Int, y: Int): Unit = {}
-  def resume(): Unit = {}
-  def update(delta: Float) {}
 }

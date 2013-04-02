@@ -9,14 +9,14 @@ class Entity(var x: Float, var y: Float) {
   sprite = new Sprite(Asset.wingTex)
   //var delta: Float = _
   
-  def update(offx: Float, offy: Float, delta: Float) = {
+  def update(offx: Float, offy: Float, delta: Float): Unit = {
     //delta = Gdx.graphics.getDeltaTime()
     x += offx
     y += offy
     rot += (y + y / 2) * delta
   }
   
-  def draw(spriteBatch: SpriteBatch) = {
+  def draw(spriteBatch: SpriteBatch): Unit = {
     sprite.setPosition(x, y)
     sprite.setRotation(rot)
     sprite.draw(spriteBatch)
