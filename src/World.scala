@@ -17,7 +17,6 @@ object World {
     worldMap(tileX)(tileY) = tileI
     println(worldMap(tileX)(tileY))
   }
-  
   def load(mapFile: String): String = {
     println("Loading: " + mapFile)
     line = null
@@ -26,17 +25,11 @@ object World {
     try {
       reader = new BufferedReader( new FileReader("./res/" + mapFile) )
       i = 0
-      while(i == 0) {
+      while(reader.ready()) {
         line = reader.readLine()
-        if(line == null) {
-          i = 1 // Can't believe I resorted to this.
-          println("Loaded: " + mapFile + "\n---")
-        }
-        else {
-          tileData = tileData + line;
-          tileData = tileData + System.getProperty("line.separator");
-          //println("... :" + line)
-        }
+        tileData = tileData + line;
+        tileData = tileData + System.getProperty("line.separator");
+        //println("... :" + line)
       }
     } catch {
       case ioe: IOException =>
